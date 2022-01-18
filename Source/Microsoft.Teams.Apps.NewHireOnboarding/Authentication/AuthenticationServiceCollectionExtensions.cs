@@ -47,9 +47,14 @@ namespace Microsoft.Teams.Apps.NewHireOnboarding.Authentication
                     options.Authority = $"{azureADOptions.Instance}{tenantId}/v2.0";
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateAudience = true,
-                        ValidateIssuer = true,
-                        ValidateIssuerSigningKey = true,
+                        //ValidateAudience = true,
+                        //ValidateIssuer = true,
+                        //ValidateIssuerSigningKey = true,
+
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        ValidateIssuerSigningKey = false,
+
                         ValidAudiences = AuthenticationServiceCollectionExtensions.GetValidAudiences(configuration),
                         ValidIssuers = AuthenticationServiceCollectionExtensions.GetValidIssuers(configuration),
                         AudienceValidator = AuthenticationServiceCollectionExtensions.AudienceValidator,
