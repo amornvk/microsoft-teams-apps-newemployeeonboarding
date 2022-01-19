@@ -39,6 +39,7 @@ namespace Microsoft.Teams.Apps.NewHireOnboarding.Authentication
             ValidateAuthenticationConfigurationSettings(configuration);
 
             var tenantId = configuration[AuthenticationServiceCollectionExtensions.TenantIdConfigurationSettingsKey];
+
             services.AddAuthentication(options => { options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; })
                 .AddJwtBearer(options =>
                 {
@@ -47,13 +48,13 @@ namespace Microsoft.Teams.Apps.NewHireOnboarding.Authentication
                     options.Authority = $"{azureADOptions.Instance}{tenantId}/v2.0";
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        //ValidateAudience = true,
-                        //ValidateIssuer = true,
-                        //ValidateIssuerSigningKey = true,
+                        ValidateAudience = true,
+                        ValidateIssuer = true,
+                        ValidateIssuerSigningKey = true,
 
-                        ValidateAudience = false,
-                        ValidateIssuer = false,
-                        ValidateIssuerSigningKey = false,
+                        //ValidateAudience = false,
+                        //ValidateIssuer = false,
+                        //ValidateIssuerSigningKey = false,
 
                         ValidAudiences = AuthenticationServiceCollectionExtensions.GetValidAudiences(configuration),
                         ValidIssuers = AuthenticationServiceCollectionExtensions.GetValidIssuers(configuration),
